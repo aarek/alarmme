@@ -1,0 +1,17 @@
+Project generated with:
+$ mvn archetype:generate \
+ -DarchetypeGroupId=net.liftweb \
+ -DarchetypeArtifactId=lift-archetype-basic_2.8.0 \
+ -DarchetypeVersion=2.1-SNAPSHOT \
+ -DarchetypeRepository=http://scala-tools.org/repo-snapshots \
+ -DremoteRepositories=http://scala-tools.org/repo-snapshots \
+ -DgroupId=pl.dwazero.alarmme \
+ -DartifactId=alarmMe \
+ -Dversion=1.0
+
+Run project with:
+$ mvn jetty:run
+
+automatic recompilation with:
+$ mvn scala:cc
+
