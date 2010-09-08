@@ -14,4 +14,3 @@ $ mvn jetty:run
 
 automatic recompilation with:
 $ mvn scala:cc
-
