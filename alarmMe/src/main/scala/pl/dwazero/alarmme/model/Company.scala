@@ -1,6 +1,7 @@
 package pl.dwazero.alarmme.model
 
 import _root_.net.liftweb.mapper._
+import net.liftweb._
 
 class Company extends LongKeyedMapper[Company] with IdPK {
     def getSingleton = Company
@@ -9,4 +10,4 @@ class Company extends LongKeyedMapper[Company] with IdPK {
     object code extends MappedPoliteString(this, 16)
 }
 
-object Company extends Company with LongKeyedMetaMapper[Company]
+object Company extends Company with LongKeyedMetaMapper[Company] with LongCRUDify[Company]

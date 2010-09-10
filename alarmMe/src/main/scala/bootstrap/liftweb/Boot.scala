@@ -34,6 +34,7 @@ class Boot {
     LiftRules.addToPackages("pl.dwazero.alarmme")
     Schemifier.schemify(true, Schemifier.infoF _, User, Company, ExchangeRate, SharePortfolio, Transaction)
 
+
     // Build SiteMap
     def sitemap() = SiteMap(
       Menu("Home") / "index" :: // Simple menu form
@@ -41,7 +42,7 @@ class Boot {
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
 	       "Static Content")) ::
       // Menu entries for the User management stuff
-      User.sitemap :_*)
+      User.sitemap ::: Company.menus :_*)
 
     LiftRules.setSiteMapFunc(sitemap)
     
