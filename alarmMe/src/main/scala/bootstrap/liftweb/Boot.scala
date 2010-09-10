@@ -32,7 +32,7 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("pl.dwazero.alarmme")
-    Schemifier.schemify(true, Schemifier.infoF _, User)
+    Schemifier.schemify(true, Schemifier.infoF _, User, Company, ExchangeRate, SharePortfolio, Transaction)
 
     // Build SiteMap
     def sitemap() = SiteMap(
@@ -44,6 +44,15 @@ class Boot {
       User.sitemap :_*)
 
     LiftRules.setSiteMapFunc(sitemap)
+    
+    
+    // set DocType to HTML5
+    LiftRules.docType.default.set((r: Req) => r match {
+      case _ if S.skipDocType => Empty
+      case _ if S.getDocType._1 => S.getDocType._2
+      case _ => Full(DocType.html5)
+    })
+    
 
     /*
      * Show the spinny image when an Ajax call starts
