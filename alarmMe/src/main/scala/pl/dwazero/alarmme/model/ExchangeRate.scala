@@ -2,6 +2,7 @@ package pl.dwazero.alarmme.model
 
 import _root_.net.liftweb.mapper._
 
-class Company extends LongKeyedMapper[Company] with IdPK {
+
+class ExchangeRate extends LongKeyedMapper[ExchangeRate] with IdPK {
     
 }
