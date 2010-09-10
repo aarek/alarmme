@@ -18,3 +18,4 @@ class SharePortfolio extends LongKeyedMapper[SharePortfolio] with IdPK {
 object SharePortfolio extends SharePortfolio 
   with LongKeyedMetaMapper[SharePortfolio] 
   with LongCRUDify[SharePortfolio]
+  with CreatedUpdated[SharePortfolio]

@@ -10,7 +10,7 @@ import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.pl.dwazero.alarmme.model._
-
+import _root_.net.liftweb.widgets.logchanger._
 
 /**
  * A class that's instantiated early and run.  It allows the application
