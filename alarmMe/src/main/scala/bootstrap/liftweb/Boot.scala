@@ -42,7 +42,7 @@ class Boot {
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
 	       "Static Content")) ::
       // Menu entries for the User management stuff
-      User.sitemap ::: Company.menus :_*)
+      User.sitemap ::: Company.menus ::: ExchangeRate.menus ::: SharePortfolio.menus ::: Transaction.menus :_*)
 
     LiftRules.setSiteMapFunc(sitemap)
     
