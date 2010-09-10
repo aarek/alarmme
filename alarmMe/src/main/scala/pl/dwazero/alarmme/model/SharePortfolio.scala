@@ -7,7 +7,7 @@ class SharePortfolio extends LongKeyedMapper[SharePortfolio] with IdPK {
     def getSingleton = SharePortfolio
     
     object user extends MappedLongForeignKey(this, User) {
-      override def validSelectValues = Full(User.findMap(u : User => Full(u.id.is, u.email.is))) 
+      override def validSelectValues = Full(User.findAll.map{u:User => (u.id.is, u.email.is)})
     }
     object name extends MappedPoliteString(this, 128) {
       override def displayName = "Nazwa"
