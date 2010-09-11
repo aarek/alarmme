@@ -11,9 +11,11 @@ class ExchangeRate extends LongKeyedMapper[ExchangeRate] with IdPK {
   }
   object company extends MappedLongForeignKey(this, Company) {
     override def dbNotNull_? = true
+    override def dbIndexed_? = true
     override def displayName = "Spółka"
   }
   object exchange extends MappedInt(this) {
+    override def defaultValue = 0
     override def displayName = "Kurs"
   }
 }

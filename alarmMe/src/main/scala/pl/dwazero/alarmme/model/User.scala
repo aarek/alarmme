@@ -31,5 +31,8 @@ class User extends MegaProtoUser[User] {
     override def textareaCols = 50
     override def displayName = "Personal Essay"
   }
+  
+  // def allPortfolios : List[SharePortfolio] = SharePortfolio.findAll(By(SharePortfolio.user, this.id))
+  
 }
 
