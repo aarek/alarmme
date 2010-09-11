@@ -21,4 +21,6 @@ class Transaction extends LongKeyedMapper[Transaction] with IdPK {
 
 object Transaction extends Transaction 
   with LongKeyedMetaMapper[Transaction] 
-  with LongCRUDify[Transaction]
+  with LongCRUDify[Transaction] {
+    override def displayName = "Transakcje"
+  }
