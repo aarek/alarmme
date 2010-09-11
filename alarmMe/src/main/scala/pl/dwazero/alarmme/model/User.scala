@@ -1,5 +1,4 @@
-package pl.dwazero.alarmme {
-package model {
+package pl.dwazero.alarmme.model
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
@@ -34,5 +33,3 @@ class User extends MegaProtoUser[User] {
   }
 }
 
-}
-}

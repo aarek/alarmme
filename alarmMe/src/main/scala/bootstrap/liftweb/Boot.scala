@@ -10,7 +10,6 @@ import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.pl.dwazero.alarmme.model._
-import _root_.net.liftweb.widgets.logchanger._
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -32,7 +31,8 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("pl.dwazero.alarmme")
-    Schemifier.schemify(true, Schemifier.infoF _, User, Company, ExchangeRate, SharePortfolio, Transaction)
+    Schemifier.schemify(true, Schemifier.infoF _, 
+      User, Company, ExchangeRate, SharePortfolio, Transaction)
 
 
     // Build SiteMap
@@ -42,7 +42,11 @@ class Boot {
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
 	       "Static Content")) ::
       // Menu entries for the User management stuff
-      User.sitemap ::: Company.menus ::: ExchangeRate.menus ::: SharePortfolio.menus ::: Transaction.menus :_*)
+      User.sitemap ::: 
+      Company.menus ::: 
+      ExchangeRate.menus ::: 
+      SharePortfolio.menus ::: 
+      Transaction.menus :_*)
 
     LiftRules.setSiteMapFunc(sitemap)
     
