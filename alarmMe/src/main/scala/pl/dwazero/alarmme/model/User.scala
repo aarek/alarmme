@@ -32,7 +32,7 @@ class User extends MegaProtoUser[User] {
     override def displayName = "Personal Essay"
   }
   
-  // def allPortfolios : List[SharePortfolio] = SharePortfolio.findAll(By(SharePortfolio.user, this.id))
+  def allPortfolios : List[SharePortfolio] = SharePortfolio.findAll(By(SharePortfolio.user, this.id))
   
 }
 

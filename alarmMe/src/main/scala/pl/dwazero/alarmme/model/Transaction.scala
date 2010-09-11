@@ -5,7 +5,7 @@ import _root_.net.liftweb.mapper._
 class Transaction extends LongKeyedMapper[Transaction] with IdPK {
   def getSingleton = Transaction
   
-  object user extends MappedLongForeignKey(this, User) {
+  object portfolio extends MappedLongForeignKey(this, User) {
     override def dbNotNull_? = true
     override def dbIndexed_? = true
   }

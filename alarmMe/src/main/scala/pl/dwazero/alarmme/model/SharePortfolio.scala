@@ -19,6 +19,9 @@ class SharePortfolio extends LongKeyedMapper[SharePortfolio] with IdPK {
     override def defaultValue = false
     override def dbIndexed_? = true // for: show all public portfolios
   }
+  
+  def allTransactions : List[Transaction] = Transaction.findAll(By(Transaction.portfolio, this.id))
+  
 }
 
 object SharePortfolio extends SharePortfolio 
