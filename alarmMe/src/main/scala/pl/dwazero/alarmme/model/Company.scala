@@ -1,6 +1,7 @@
 package pl.dwazero.alarmme.model
 
 import _root_.net.liftweb.mapper._
+import _root_.net.liftweb.sitemap._
 
 class Company extends LongKeyedMapper[Company] with IdPK {
   def getSingleton = Company
@@ -12,4 +13,14 @@ class Company extends LongKeyedMapper[Company] with IdPK {
 object Company extends Company 
   with LongKeyedMetaMapper[Company] 
   with LongCRUDify[Company]
-  with CreatedUpdated
+  with CreatedUpdated {
+    def menu(prefix:List[String]):Menu = {
+      val submenus:List[Menu] = List(
+        Menu(Loc("addCompany", prefix ::: "add" :: Nil, "Dodaj"))
+        
+        )
+                                
+      return Menu(Loc("indexCompany", prefix ::: "index" :: Nil, "Firmy"), submenus :_*)
+
+    }
+  }
