@@ -40,14 +40,15 @@ class Boot {
       Menu("Home") / "index" :: // Simple menu form
       Menu("Utwórz portfel") / "portfolio" / "create" ::
       // Menu with special Link
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")) ::
+      Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
+      Company.menu(List("company")) ::
       // Menu entries for the User management stuff
-      User.sitemap ::: 
-      Company.menus ::: 
-      ExchangeRate.menus ::: 
-      SharePortfolio.menus ::: 
-      Transaction.menus :_*)
+      User.sitemap :_* 
+    )
+      // Company.menus ::: 
+      // ExchangeRate.menus ::: 
+      // SharePortfolio.menus ::: 
+      // Transaction.menus :_*)
 
     LiftRules.setSiteMapFunc(sitemap)
     
