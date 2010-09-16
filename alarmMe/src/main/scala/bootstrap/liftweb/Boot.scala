@@ -35,12 +35,12 @@ class Boot {
       User, Company, ExchangeRate, SharePortfolio, Transaction)
 
 
-    val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/login"))
+    val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/usr_mgt/login"))
 
     // Build SiteMap
     def sitemap() = SiteMap(
       Menu("Home") / "index" :: // Simple menu form
-      Menu("Utwórz portfel") / "portfolio" / "create" :: //>> If(() => User.loggedIn_?, "You must be logged in"),
+      Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
       // Menu with special Link
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       Company.menu(List("company"), isLoggedIn) ::
