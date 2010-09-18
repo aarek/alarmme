@@ -44,12 +44,13 @@ class Boot {
       
       // Menu items for Companies
       Menu(Loc("createCompany", List("company", "create"), "Dodaj spółkę", isLoggedIn)) ::
+      Menu(Loc("indexCompanies", List("company", "index"), "Spółki", isLoggedIn), company_menus) ::
       
       Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
       // Menu with special Link
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       
-      Company.menu(List("company"), isLoggedIn) ::
+      // Company.menu(List("company"), isLoggedIn) ::
       
       // Menusy dla Portfoliosow
       Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn)) ::

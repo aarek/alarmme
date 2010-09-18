@@ -1,4 +1,27 @@
 <lift:surround with="default" at="content">
-  <h2>Company</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <lift:CompaniesPaginated.renderPage>
+        <tr>
+          <td><item:id /></td>
+          <td><item:name /></td>
+          <td><item:code /></td>
+        </tr>
+      </lift:CompaniesPaginated.renderPage>
+    </tbody>
+  </table>
+  
+  <div class="pagination">
+    <lift:CompaniesPaginated.paginate>
+      <nav:first/> | <nav:prev /> | <nav:allpages/> | <nav:next/> | <nav:last/> | <nav:records />
+    </lift:CompaniesPaginated.paginate>
+  </div>
+  
 </lift:surround>
-
