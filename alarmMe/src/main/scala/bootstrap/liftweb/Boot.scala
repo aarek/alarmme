@@ -7,6 +7,7 @@ import _root_.net.liftweb.http.provider._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
 import net.liftweb.widgets.tablesorter._
+import net.liftweb.widgets.menu._
 import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
@@ -37,13 +38,14 @@ class Boot {
 
 
     val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/user_mgt/login"))
+    
+    val company_menus = Menu(Loc("createCompany", List("company", "create"), "Dodaj", isLoggedIn))
 
     // Build SiteMap
     def sitemap() = SiteMap(
       Menu("Home") / "index" :: // Simple menu form
       
       // Menu items for Companies
-      Menu(Loc("createCompany", List("company", "create"), "Dodaj spółkę", isLoggedIn)) ::
       Menu(Loc("indexCompanies", List("company", "index"), "Spółki", isLoggedIn), company_menus) ::
       
       Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
@@ -96,6 +98,7 @@ class Boot {
      * Inicjalizacja widgetow
      */
     TableSorter.init
+    MenuWidget.init
     
   }
 
