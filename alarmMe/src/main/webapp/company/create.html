@@ -1,0 +1,10 @@
+<lift:surround with="default" at="content">
+  <h2>Dodaj spółkę</h2>
+  
+  <lift:Company.add form="POST">
+    Nazwa: <entry:name /><br />
+    Oznaczenie: <entry:code /><br />
+    <entry:submit />
+  </lift:Company.add>
+  
+</lift:surround>

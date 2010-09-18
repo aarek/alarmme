@@ -8,8 +8,10 @@ import Helpers._
 class Stats {
   
   def summary(in: NodeSeq) = {
-    var users_count: Long = User.count()
-    Helpers.bind("stat", in, "users" -> users_count.toString)
+    val users_count: Long = User.count()
+    Helpers.bind("stat", in, 
+      "users" -> users_count.toString,
+      "companies" -> Company.count().toString)
   }
 }
 
