@@ -3,13 +3,13 @@ package pl.dwazero.alarmme.snippet
 import _root_.scala.xml.{NodeSeq, Text}
 import _root_.net.liftweb.util.{Helpers}
 import _root_.net.liftweb.http.{RedirectResponse, RequestVar, S, SHtml}
-import pl.dwazero.alarmme.model.{Company => CompanyModel}
+import pl.dwazero.alarmme.model.{Company}
 import Helpers._
 
 object name extends RequestVar("")
 object code extends RequestVar("")
 
-class Company {
+class Companies {
   
   def add(in: NodeSeq): NodeSeq = {
     
@@ -18,7 +18,7 @@ class Company {
         S.error("Zbyt krótka nazwa spółki")
         // TODO: check if company exists in DB
       } else {
-        val company: CompanyModel = CompanyModel.create
+        val company: Company = Company.create
         company.name(name)
         company.code(code)
         val saved: Boolean = company.save
