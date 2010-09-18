@@ -16,7 +16,7 @@ object Company extends Company
   with LongKeyedMetaMapper[Company]
   with LongCRUDify[Company]
   with CreatedUpdated {
-    def menu(prefix: List[String], isLoggedIn: If): Menu = {
+    @deprecated def menu(prefix: List[String], isLoggedIn: If): Menu = {
       val submenus: List[Menu] = List(
         Menu(Loc("addCompany", prefix ::: "add" :: Nil, "Dodaj"))
         )
