@@ -19,9 +19,7 @@ object Company extends Company
     def menu(prefix: List[String], isLoggedIn: If): Menu = {
       val submenus: List[Menu] = List(
         Menu(Loc("addCompany", prefix ::: "add" :: Nil, "Dodaj"))
-        
         )
-      
       return Menu(Loc("indexCompany", prefix ::: "index" :: Nil, "Firmy", isLoggedIn), submenus :_*)
     }
   }
