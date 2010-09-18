@@ -6,6 +6,7 @@ import _root_.net.liftweb.http._
 import _root_.net.liftweb.http.provider._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
+import net.liftweb.widgets.tablesorter._
 import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
@@ -35,7 +36,7 @@ class Boot {
       User, Company, ExchangeRate, SharePortfolio, Transaction)
 
 
-    val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/usr_mgt/login"))
+    val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/user_mgt/login"))
 
     // Build SiteMap
     def sitemap() = SiteMap(
@@ -44,6 +45,8 @@ class Boot {
       // Menu with special Link
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       Company.menu(List("company"), isLoggedIn) ::
+      // Menusy dla Portfoliosow
+      Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn)) ::
       // Menu entries for the User management stuff
       User.sitemap :_*
     )
@@ -80,6 +83,12 @@ class Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     S.addAround(DB.buildLoanWrapper)
+    
+    /*
+     * Inicjalizacja widgetow
+     */
+    TableSorter.init
+    
   }
 
   /**
