@@ -71,6 +71,14 @@ class Boot {
     LiftRules.setSiteMapFunc(sitemap)
     
     
+    LiftRules.rewrite.append {
+      case RewriteRequest(
+            ParsePath(List("share-portfolio", id), _, _, _), _, _) =>
+            RewriteResponse(List("share-portfolio", "show"), Map("id" -> id))
+    }
+    
+    
+    
     // set DocType to HTML5
     LiftRules.docType.default.set((r: Req) => r match {
       case _ if S.skipDocType => Empty
