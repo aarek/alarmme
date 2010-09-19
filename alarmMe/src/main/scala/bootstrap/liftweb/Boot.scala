@@ -49,6 +49,7 @@ class Boot {
       Menu(Loc("indexCompanies", List("company", "index"), "Spółki", isLoggedIn), company_menus) ::
       
       Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
+      
       // Menu with special Link
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       
