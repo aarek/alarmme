@@ -1,0 +1,11 @@
+<lift:surround with="default" at="content">
+  <h2>Utwórz portfel</h2>
+  
+  <lift:SharePortfolios.add form="POST">
+    Nazwa: <entry:name /><br />
+    Opis: <entry:description /><br />
+    Publiczny: <entry:is_public /><br />
+    <entry:submit />
+  </lift:SharePortfolios.add>
+  
+</lift:surround>
