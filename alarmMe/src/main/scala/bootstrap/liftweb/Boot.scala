@@ -97,6 +97,16 @@ class Boot {
 
     S.addAround(DB.buildLoanWrapper)
     
+    
+    LiftRules.noticesAutoFadeOut.default.set( (notices: NoticeType.Value) => {
+        notices match {
+          case NoticeType.Notice => Full(2 seconds, 2 seconds)
+          case _ => Empty
+        }
+      }
+    )
+    
+    
     /*
      * Inicjalizacja widgetow
      */
