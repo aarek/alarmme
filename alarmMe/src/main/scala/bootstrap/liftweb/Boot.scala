@@ -73,8 +73,8 @@ class Boot {
     
     LiftRules.rewrite.append {
       case RewriteRequest(
-            ParsePath(List("share-portfolio", id), _, _, _), _, _) =>
-            RewriteResponse(List("share-portfolio", "show"), Map("id" -> id))
+            ParsePath(List("share-portfolio", "show", id), _, _, _), _, _) =>
+            RewriteResponse(List("share-portfolio/show"), Map("id" -> id))
     }
     
     
