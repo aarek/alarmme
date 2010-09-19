@@ -36,30 +36,33 @@ class Boot {
     Schemifier.schemify(true, Schemifier.infoF _, 
       User, Company, ExchangeRate, SharePortfolio, Transaction)
 
-
+    // Am I logged in?
     val isLoggedIn = If(() => User.loggedIn_?, () => RedirectResponse("/user_mgt/login"))
     
+    // Company menu subitems
     val company_menus = Menu(Loc("createCompany", List("company", "create"), "Dodaj", isLoggedIn))
+    
+    // Portfolio menu subitems
+    val portfolio_menus = Menu(Loc("createSharePortfolio", List("share-portfolio", "create"), "Dodaj", isLoggedIn))
 
     // Build SiteMap
     def sitemap() = SiteMap(
-      Menu("Home") / "index" :: // Simple menu form
+      Menu("Home") / "index" ::
       
       // Menu items for Companies
       Menu(Loc("indexCompanies", List("company", "index"), "Spółki", isLoggedIn), company_menus) ::
       
-      Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
       // Menu with special Link
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       
-      // Company.menu(List("company"), isLoggedIn) ::
-      
       // Menusy dla Portfoliosow
-      Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn)) ::
+      Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn), portfolio_menus) ::
       
       // Menu entries for the User management stuff
       User.sitemap :_*
     )
+      //Menu(Loc("createPortfolio", Link("portfolio" :: Nil, true, "/portfolio/create"), "Utwórz portfel", isLoggedIn)) ::
+      // Company.menu(List("company"), isLoggedIn) ::
       // Company.menus ::: 
       // ExchangeRate.menus ::: 
       // SharePortfolio.menus ::: 

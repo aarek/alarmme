@@ -23,8 +23,7 @@ class Companies {
         company.code(code)
         val saved: Boolean = company.save
         S.notice("Spółka dodana")
-        // TODO: fix redirect
-        RedirectResponse("/")
+        S.redirectTo("/company/index")
       }
     
     Helpers.bind("entry", in, 
