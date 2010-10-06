@@ -27,7 +27,7 @@ class SharePortfolios {
         val currentUser: User = User.currentUser.open_!
         val sharePortfolio: SharePortfolio = SharePortfolio.create
         sharePortfolio.name(sp_name)
-        sharePortfolio.description(code)
+        sharePortfolio.description(description)
         sharePortfolio.user(currentUser)
         sharePortfolio.is_public(is_public)
         val saved: Boolean = sharePortfolio.save
