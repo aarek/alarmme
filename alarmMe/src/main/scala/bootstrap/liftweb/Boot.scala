@@ -43,7 +43,10 @@ class Boot {
     val company_menus = Menu(Loc("createCompany", List("company", "create"), "Dodaj", isLoggedIn))
     
     // Portfolio menu subitems
-    val portfolio_menus = Menu(Loc("createSharePortfolio", List("share-portfolio", "create"), "Dodaj", isLoggedIn))
+    val portfolio_menus:List[Menu] = List(
+      Menu(Loc("createSharePortfolio", List("share-portfolio", "create"), "Dodaj", isLoggedIn)), 
+      Menu(Loc("showSharePortfolio", List("share-portfolio", "show"), "Show", isLoggedIn, Hidden))
+    )
 
     // Build SiteMap
     def sitemap() = SiteMap(
@@ -56,7 +59,7 @@ class Boot {
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")) ::
       
       // Menusy dla Portfoliosow
-      Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn), portfolio_menus) ::
+      Menu(Loc("indexSharePortfolio", List("share-portfolio", "index"), "Portfolio", isLoggedIn), portfolio_menus:_*) ::
       
       // Menu entries for the User management stuff
       User.sitemap :_*
@@ -71,12 +74,12 @@ class Boot {
     LiftRules.setSiteMapFunc(sitemap)
     
     
-    LiftRules.rewrite.append {
+    LiftRules.statefulRewrite.append {
       case RewriteRequest(
             ParsePath(List("share-portfolio", "show", id), _, _, _), _, _) =>
-            RewriteResponse(List("share-portfolio/show"), Map("id" -> id))
+            RewriteResponse(List("share-portfolio", "show"), Map("id" -> id))
+      
     }
-    
     
     
     // set DocType to HTML5
