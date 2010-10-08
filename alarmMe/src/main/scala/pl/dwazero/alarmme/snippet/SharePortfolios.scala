@@ -3,6 +3,8 @@ package pl.dwazero.alarmme.snippet
 import _root_.scala.xml.{NodeSeq, Text}
 import _root_.net.liftweb.util.{Helpers}
 import _root_.net.liftweb.http.{RedirectResponse, RequestVar, S, SHtml}
+import _root_.net.liftweb.common.{Box,Empty,Full}
+import _root_.net.liftweb.mapper._
 import pl.dwazero.alarmme.model.{SharePortfolio, User}
 import Helpers._
 
@@ -43,5 +45,22 @@ class SharePortfolios {
       "is_public" -> SHtml.checkbox(is_public.is, is_public(_)),
       "submit" -> SHtml.submit("Dodaj", processCompanyAdd))
   }
+  
+  
+  def detail(in: NodeSeq): NodeSeq = S.param("id") match {
+    case Full(portfolioId) => {
+      SharePortfolio.find(By(SharePortfolio.user, User.currentUser.open_!.id), By(SharePortfolio.id, portfolioId.toLong)) match {
+        case portfolioContainer:Full[SharePortfolio] => Text("Jea, foundit")
+        // {
+        //   // znaczy sie ze znalazl, trzeba dorobic detail
+        // }
+        case _ => Text("Nie znalazłem twojego portfolio o id " + portfolioId)
+      }
+    }
+    case _ => Text("Brak id portfolio")
+  }
+  
+  
+  
 }
 

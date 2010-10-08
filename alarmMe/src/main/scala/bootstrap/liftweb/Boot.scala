@@ -76,8 +76,8 @@ class Boot {
     
     LiftRules.statefulRewrite.append {
       case RewriteRequest(
-            ParsePath(List("share-portfolio", "show", id), _, _, _), _, _) =>
-            RewriteResponse(List("share-portfolio", "show"), Map("id" -> id))
+            ParsePath(List("share-portfolio", "show", portfolioId), _, _, _), _, _) =>
+            RewriteResponse(List("share-portfolio", "show"), Map("id" -> urlDecode(portfolioId)))
       
     }
     

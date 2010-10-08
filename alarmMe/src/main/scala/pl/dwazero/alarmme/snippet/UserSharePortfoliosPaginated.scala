@@ -5,7 +5,7 @@ import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
 import _root_.net.liftweb.mapper.view._
 import _root_.net.liftweb.mapper._
-import _root_.net.liftweb.http.PaginatorSnippet
+import _root_.net.liftweb.http.{PaginatorSnippet,S,SHtml}
 
 
 import pl.dwazero.alarmme.model.{SharePortfolio, User}
@@ -25,7 +25,8 @@ class UserSharePortfoliosPaginated extends  PaginatorSnippet[SharePortfolio] {
       item => bind("item", in, 
           "id"          -> item.id,
           "name"        -> item.name,
-          "description" -> item.description 
+          "description" -> item.description,
+          "show"        -> SHtml.link("/share-portfolio/show/" + item.id, () => Unit, Text("Pokaż"))
         )
     )
   
