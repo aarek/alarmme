@@ -1,7 +1,32 @@
 <lift:surround with="default" at="content">
   <h2>Show</h2>
   <lift:SharePortfolios.detail>
-    <strong>dawaj testa</strong>
+    <p>Nazwa: <portfolio:name/></p>
+    <p>Opis: <portfolio:description/></p>
+    <div>
+      <h3>Transakcje</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>firma</th>
+            <th>ilosc</th>
+            <th>cena jednostkowa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <portfolio:transactions>
+            <tr>
+              <td><transaction:company/></td>
+              <td><transaction:volume/></td>
+              <td><transaction:unit_price/></td>
+            </tr>
+          </portfolio:transactions>
+        </tbody>
+      </table>
+      
+      
+    </div>
+    
   </lift:SharePortfolios.detail>
   
 </lift:surround>

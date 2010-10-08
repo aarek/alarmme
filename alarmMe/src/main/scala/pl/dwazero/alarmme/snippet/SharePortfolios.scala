@@ -5,7 +5,7 @@ import _root_.net.liftweb.util.{Helpers}
 import _root_.net.liftweb.http.{RedirectResponse, RequestVar, S, SHtml}
 import _root_.net.liftweb.common.{Box,Empty,Full}
 import _root_.net.liftweb.mapper._
-import pl.dwazero.alarmme.model.{SharePortfolio, User}
+import pl.dwazero.alarmme.model.{SharePortfolio, User, Transaction}
 import Helpers._
 
 object sp_name extends RequestVar[String]("") // maxlen -> 128
@@ -50,10 +50,23 @@ class SharePortfolios {
   def detail(in: NodeSeq): NodeSeq = S.param("id") match {
     case Full(portfolioId) => {
       SharePortfolio.find(By(SharePortfolio.user, User.currentUser.open_!.id), By(SharePortfolio.id, portfolioId.toLong)) match {
-        case portfolioContainer:Full[SharePortfolio] => Text("Jea, foundit")
-        // {
-        //   // znaczy sie ze znalazl, trzeba dorobic detail
-        // }
+        case portfolioContainer:Full[SharePortfolio] => {
+          // znaczy sie ze znalazl, trzeba dorobic detail
+          
+          val sharePortfolio:SharePortfolio = portfolioContainer.open_!
+          
+          val transactions:List[Transaction] = sharePortfolio.allTransactions
+          val transactionsTable = buildTransactionsTable(transactions, in)
+          
+          // TODO: dobindowac tutaj cala reszte, ewentualnie nowe snippety porobic na dodatkowe rzeczy
+          Helpers.bind("portfolio", in,
+            "name"          -> sharePortfolio.name,
+            "description"   -> sharePortfolio.description,
+            "transactions"  -> transactionsTable
+          )
+          
+          
+        }
         case _ => Text("Nie znalazłem twojego portfolio o id " + portfolioId)
       }
     }
@@ -61,6 +74,18 @@ class SharePortfolios {
   }
   
   
+  
+  // -----------------------------------------------------------------------------------------------------------------------------
+  
+  def buildTransactionsTable(transactions: List[Transaction], in: NodeSeq) = {
+    transactions.flatMap(transaction => {
+      Helpers.bind("transaction", Helpers.chooseTemplate("portfolio", "transactions", in),
+        "company"     -> Text(transaction.company.name),
+        "volume"      -> Text(transaction.volume.toString),
+        "unit_price"  -> Text(transaction.unit_price.toString)
+      )
+    })
+  }
   
 }
 
